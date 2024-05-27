@@ -1,0 +1,43 @@
+.app {
+    text-align: center;
+  }
+  .tasks-container {
+    display: block;
+    margin-top: 20px;
+    margin-left:auto;
+    margin-right:auto;
+    width: 100%;
+    
+  }
+
+  .container-child {
+    display: inline-block;
+    width: 30%;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-left:auto;
+    margin-right:auto;
+
+  }
+  .task-list {
+    flex: 1;
+    margin: 0 10px;
+  }
+  .tasks-column {
+    flex: 1;
+    margin: 0 10px;
+  }
+  .task {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px 0;
+  }
+  .task-ux {
+    background-color: peachpuff;
+  }
+  .task-devfrontend {
+    background-color: lightgreen;
+  }
+  .task-devbackend {
+    background-color: plum;
+  }
