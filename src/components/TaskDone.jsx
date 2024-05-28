@@ -1,22 +1,31 @@
 import {useState} from 'react';
 
-export function TaskDone({ task }) {
+export function TaskDone({tasks}) {
+
 
   function handleReturn() {
-    console.log("return task: ", task.key);
+    console.log("return task: ", tasks.key);
   };
 
   function handleArchive () {
-    console.log("archive task: ", task.key);
+    console.log("archive task: ", tasks.key);
   }
 
   return (
-    <div className="task task-done">
-      <div>{task.text}</div>
-      <div>Assigned to: {task.assignedTo}</div>
-      <div>History </div>
-      <button onClick={handleReturn}>Return</button>
-      <button onClick={handleArchive}>Archive</button>
-    </div>
+    <>
+    {tasks.map((task) => 
+      <div className="task task-done">
+        <p>{task.text}</p>
+        <p>Assigned to: {task.assignedTo}</p>
+        <div className="history">
+          <p>{task.date.done}</p>
+          <p>{task.date.assigned}</p>
+          <p>{task.date.created}</p>
+        </div>
+        <button onClick={handleReturn}>Return</button>
+        <button onClick={handleArchive}>Archive</button>
+      </div>)}
+    </>
+    
   );
 };
