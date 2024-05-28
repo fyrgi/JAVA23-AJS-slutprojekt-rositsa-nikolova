@@ -1,6 +1,6 @@
 import {useState} from 'react';
 
-export function TaskDone({tasks}) {
+export function TaskDone({taskDone}) {
 
 
   function handleReturn() {
@@ -13,7 +13,7 @@ export function TaskDone({tasks}) {
 
   return (
     <>
-    {tasks.map((task) => 
+    {taskDone.map((task) => 
       <div className="task task-done">
         <p>{task.text}</p>
         <p>Assigned to: {task.assignedTo}</p>

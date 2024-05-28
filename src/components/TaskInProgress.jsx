@@ -1,13 +1,12 @@
 
-export function TaskInProgress(tasks) {
-console.log("task in progress: ", tasks.tasks);
-const taskList = tasks.tasks;
+export function TaskInProgress({taskInProgress}) {
+console.log(taskInProgress);
 function handleDone() {
   console.log("done task: ");
 }
   return (
     <>
-      {taskList.map((task) => (
+      {taskInProgress.map((task) => (
         <div className={"task task-inprogress"}>
         <p>{task.text}</p>
         <p>Assigned to: {task.assignedTo}</p>

@@ -11,6 +11,10 @@ export function App() {
   //let tasksDb = [];
   const [status, setStatus] = useState('loading');
   const [tasksCont, setTasksCont] = useState(['To Do', 'In Progress', 'Done']);
+  const [taskToDo, setTaskToDo] = useState([]);
+  const [taskInProgress, setTaskInProgress] = useState([]);
+  const [taskDone, setTaskDone] = useState([]);
+  const [taskArchived, setTaskArchived] = useState([]);
   
   const taskHardCoded = [{
     text: "Task 1 text",
@@ -47,17 +51,20 @@ export function App() {
     // smeni obj na array. Vmesto Object.values...  
     onValue(tasksRef, (snapshot) => {
       const data = snapshot.val();
-      console.log('useEffect', data);
-
-      for(const key in data){
-        console.log(key, data[key]);
-
+      //console.log('useEffect', data);
+      if (data === null) {
+        setStatus('error');
+        return;
       }
-      
       setTasks(Object.values(data));
-    })
-  }, []);
 
+      setTaskToDo(tasks.filter(task => task.status === 'to do'));
+      setTaskInProgress(tasks.filter(task => task.status === 'in progress'));
+      setTaskDone(tasks.filter(task => task.status === 'done'));
+      setTaskArchived(tasks.filter(task => task.status === 'archived'));
+      
+    });
+  }, []);
 
   return ( 
     <div className="app">
@@ -65,7 +72,7 @@ export function App() {
 
         {status === 'error' && <ErrorMsg/>}
         {status === 'loading' && <LoadingMsg/>}
-        <div className="tasks-container"><TasksContainer container={tasksCont} tasks={taskHardCoded}/></div>
+        <div className="tasks-container"><TasksContainer container={tasksCont} taskInProgress={taskInProgress} taskToDo={taskToDo} taskDone={taskDone} taskArchived={taskArchived}/></div>
         
     </div>
   )

@@ -1,12 +1,11 @@
 import { useState } from 'react';
 
-export function TaskToDo(tasks){
-  const taskList = tasks.tasks;
+export function TaskToDo({taskToDo}){
 
   return (
   <>
     {
-      taskList.map(task =>
+      taskToDo.map(task =>
         <div className="task task-to-do">
         <p>{task.text}</p>
         <div className='history'>
