@@ -9,13 +9,12 @@
     justify-content: center;
     margin-top: 20px;
     width: 100%;
-    border: 7px solid #ccc;
-    
   }
 
   .container-child {
     display: inline-block;
     width: 23%;
+    margin-bottom: 40px ;
     border: 1px solid #ccc;
     padding: 10px;
     margin-left:20px;
@@ -62,28 +61,28 @@
     display: block;
     padding: 10px;
     margin: 10px 0;
-    border: 7px solid green;
+    border: 2px solid green;
   }
 
   .task-todo {
     display: block;
     padding: 10px;
     margin: 10px 0;
-    border: 7px solid blue;
+    border: 2px solid blue;
   }
 
   .task-inprogress {
     display: block;
     padding: 10px;
     margin: 10px 0;
-    border: 7px solid orange;
+    border: 2px solid orange;
   }
 
   .task-archive {
     display: block;
     padding: 10px;
     margin: 10px 0;
-    border: 7px solid red;
+    border: 2px solid darkgray;
   }
 
   .history-image {

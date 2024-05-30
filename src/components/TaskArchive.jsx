@@ -19,7 +19,7 @@ export function TaskArchive({taskArchived}) {
     <>
     {taskArchived.length === 0 ? <InfoMsg msg="No archived tasks" /> :
       taskArchived.map((task) => 
-      <div key={task.key} className={`task task-archived}`}>
+      <div key={task.key} className="task task-archive">
         <div className="category"><p>{task.category}</p></div>
         <div className='history-image'><span className="material-symbols-outlined">history</span></div>
         <div className="history">
