@@ -1,14 +1,16 @@
-
+import { InfoMsg } from "./InfoMsg";
 export function TaskInProgress({taskInProgress}) {
-console.log(taskInProgress);
-function handleDone() {
-  console.log("done task: ");
+function handleDone(event) {
+  console.log(event.target.innerText)
+  event.preventDefault();
+
 }
   return (
     <>
-      {taskInProgress.map((task) => (
-        <div className={"task task-inprogress"}>
-        <p>{task.text}</p>
+      { taskInProgress.length === 0 ? <InfoMsg msg="No tasks in progress" />:
+       taskInProgress.map((task) => (
+        <div className={`task task-inprogress task-${task.category.replace(/\s+/g, '').toLowerCase()}`}>
+        <p>{task.task}</p>
         <p>Assigned to: {task.assignedTo}</p>
         <div className="history">
           <p>{task.date.assigned}</p>

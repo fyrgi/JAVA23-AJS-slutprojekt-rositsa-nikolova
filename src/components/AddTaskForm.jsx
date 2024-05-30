@@ -1,12 +1,29 @@
 import { useState } from 'react';
+import { db, push, ref, set } from '../modules/firebaseConfig.js';
 
-export function AddTaskForm() {
+export function AddTaskForm({ setTasks }) {
   const [taskText, setTaskText] = useState('');
   const [category, setCategory] = useState('');
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    console.log(taskText, category);
+    if (taskText.trim() === "" || category === "") return;
+
+    const newTask = {
+      task: taskText,
+      category,
+      status: 'to do',
+      date: { created: new Date().toISOString().slice(0, 16).replace("T", " ") }
+    };
+
+    try {
+      const newTaskRef = push(ref(db, 'tasks'));
+      await set(newTaskRef, newTask);
+      setTaskText('');
+      setCategory('');
+    } catch (error) {
+      console.error("Error adding task: ", error);
+    }
   }
 
   return (

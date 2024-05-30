@@ -1,5 +1,5 @@
 import {initializeApp} from "firebase/app";
-import {getDatabase, ref , onValue, update, push, ref} from "firebase/database";
+import {getDatabase, ref , onValue, update, push, ref, set} from "firebase/database";
 import { collection, doc } from "firebase/firestore";
 
 // Web app's Firebase configuration
@@ -16,4 +16,4 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 const tasksRef = ref(db, 'tasks');
-export {db, tasksRef, onValue, ref, update, push} 
+export {db, tasksRef, onValue, ref, update, push, set} 

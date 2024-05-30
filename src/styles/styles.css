@@ -2,21 +2,22 @@
     text-align: center;
   }
   .tasks-container {
-    display: block;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     margin-top: 20px;
-    margin-left:auto;
-    margin-right:auto;
     width: 100%;
     
   }
 
   .container-child {
     display: inline-block;
-    width: 30%;
+    width: 23%;
     border: 1px solid #ccc;
     padding: 10px;
-    margin-left:auto;
-    margin-right:auto;
+    margin-left:20px;
+    margin-right:20px;
+    height: 500px;
 
   }
   .task-list {
@@ -27,17 +28,53 @@
     flex: 1;
     margin: 0 10px;
   }
+
+  .task-ux{
+    background-color: aquamarine;
+  }
+
+.task-devfrontend{
+    background-color: skyblue;
+  }
+
+.task-devbackend{
+    background-color: peachPuff;
+  }
+
   .task {
-    border: 1px solid #ccc;
+    display: block;
     padding: 10px;
     margin: 10px 0;
+    border: 2px solid green;
+    border-radius: 5px;
+    text-align: left;
   }
-  .task-ux {
-    background-color: peachpuff;
+
+  .task-done {
+    display: block;
+    padding: 10px;
+    margin: 10px 0;
+    border: 7px solid green;
   }
-  .task-devfrontend {
-    background-color: lightgreen;
+
+  .task-todo {
+    display: block;
+    padding: 10px;
+    margin: 10px 0;
+    border: 7px solid blue;
   }
-  .task-devbackend {
-    background-color: plum;
+
+  .task-inprogress {
+    display: block;
+    padding: 10px;
+    margin: 10px 0;
+    border: 7px solid orange;
   }
+
+  .task-archive {
+    display: block;
+    padding: 10px;
+    margin: 10px 0;
+    border: 7px solid red;
+  }
+

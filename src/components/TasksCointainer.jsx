@@ -5,10 +5,9 @@ import { TaskInProgress } from "./TaskInProgress.jsx";
 import { TaskDone } from "./TaskDone.jsx";
 import { AllTasks } from "./AllTasks.jsx";
 export function TasksContainer({container, taskInProgress, taskToDo, taskDone, taskArchived}) {
-    console.log(container);
-    console.log(taskInProgress);
+    
     return (
-        <div>
+        <div className="task-container">
             {container.map(type => 
                 <div className="container-child" key={type}><h1>{type}</h1>
                     {type === "To Do" && <TaskToDo taskToDo={taskToDo}/>}

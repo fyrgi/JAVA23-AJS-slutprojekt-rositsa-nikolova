@@ -1,5 +1,5 @@
 import {useState} from 'react';
-
+import { InfoMsg } from './InfoMsg';
 export function TaskDone({taskDone}) {
 
 
@@ -13,9 +13,10 @@ export function TaskDone({taskDone}) {
 
   return (
     <>
-    {taskDone.map((task) => 
-      <div className="task task-done">
-        <p>{task.text}</p>
+    {taskDone.length === 0 ? <InfoMsg msg="No tasks done" /> :
+      taskDone.map((task) => 
+      <div className={`task task-done task-${task.category.replace(/\s+/g, '').toLowerCase()}`}>
+        <p>{task.task}</p>
         <p>Assigned to: {task.assignedTo}</p>
         <div className="history">
           <p>{task.date.done}</p>
