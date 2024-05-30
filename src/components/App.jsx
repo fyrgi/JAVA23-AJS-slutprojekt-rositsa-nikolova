@@ -4,12 +4,13 @@ import { AddTaskForm } from './AddTaskForm.jsx';
 import { ErrorMsg } from './ErrorMsg.jsx';
 import { LoadingMsg } from './LoadingMsg.jsx';
 import { TasksContainer } from './TasksCointainer.jsx';
-
+import { ShowArchived } from './ShowArchived.jsx';
+import { TaskArchive } from './TaskArchive.jsx';
 export function App() {
 
   const [tasks, setTasks] = useState([]);
   const [status, setStatus] = useState('loading');
-  const tasksCont = ['To Do', 'In Progress', 'Done'];
+  const [tasksCont, setTasksCont] = useState(['To Do', 'In Progress', 'Done']);
   const [taskToDo, setTaskToDo] = useState([]);
   const [taskInProgress, setTaskInProgress] = useState([]);
   const [taskDone, setTaskDone] = useState([]);
@@ -37,16 +38,19 @@ export function App() {
     setTaskArchived(tasks.filter(task => task.status === 'archived'));
   }, [tasks]);
 
+
   return ( 
     <div className="app">
-        <AddTaskForm/>
 
+        <AddTaskForm/>
+        <ShowArchived tasksCont={tasksCont} setTasksCont={setTasksCont}/>
         {status === 'error' && <ErrorMsg/>}
         {status === 'loading' && <LoadingMsg/>}
         {status === 'loaded' && <TasksContainer container={tasksCont}
                                     taskInProgress={taskInProgress}
                                     taskToDo={taskToDo}
-                                    taskDone={taskDone}/>
+                                    taskDone={taskDone}
+                                    taskArchived={taskArchived}/>
         }
         
     </div>

@@ -51,7 +51,7 @@ export function TaskToDo({ taskToDo }) {
         taskToDo.map(task => (
           <div key={task.key} className={`task task-todo task-${task.category.replace(/\s+/g, '').toLowerCase()}`}>
             <div className="category"><p>{task.category}</p></div>
-            <div className='history-image'><span class="material-symbols-outlined">history</span></div>
+            <div className='history-image'><span className="material-symbols-outlined">history</span></div>
             <div className="history">
               <p>Created: {task.date.created}</p>
             </div>

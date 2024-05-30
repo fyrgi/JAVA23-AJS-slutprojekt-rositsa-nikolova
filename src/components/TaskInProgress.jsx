@@ -28,7 +28,7 @@ async function handleDone(e, task) {
        taskInProgress.map((task) => (
         <div key={task.key} className={`task task-inprogress task-${task.category.replace(/\s+/g, '').toLowerCase()}`}>
           <div className="category"><p>{task.category}</p></div>
-          <div className='history-image'><span class="material-symbols-outlined">history</span></div>
+          <div className='history-image'><span className="material-symbols-outlined">history</span></div>
           <div className="history">
             <p>Assigned: {task.date.assigned}</p>
             <p>Created: {task.date.created}</p>

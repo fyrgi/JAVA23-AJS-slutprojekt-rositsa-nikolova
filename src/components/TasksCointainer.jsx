@@ -3,9 +3,8 @@ import { useState, useEffect } from "react";
 import { TaskToDo } from "./TaskToDo.jsx";
 import { TaskInProgress } from "./TaskInProgress.jsx";
 import { TaskDone } from "./TaskDone.jsx";
-import { AllTasks } from "./AllTasks.jsx";
-export function TasksContainer({setTasks, container, taskInProgress, taskToDo, taskDone}) {
-    
+import { TaskArchive } from "./TaskArchive.jsx";
+export function TasksContainer({setTasks, container, taskInProgress, taskToDo, taskDone, taskArchived}) {
     return (
         <div className="task-container">
             {container.map(type => 
@@ -13,6 +12,7 @@ export function TasksContainer({setTasks, container, taskInProgress, taskToDo, t
                     {type === "To Do" && <TaskToDo taskToDo={taskToDo} setTasks={setTasks}/>}
                     {type === "In Progress" && <TaskInProgress taskInProgress={taskInProgress}/>}
                     {type === "Done" && <TaskDone taskDone={taskDone}/>}
+                    {type === "Archived" && <TaskArchive taskArchived={taskArchived}/>}
                 </div>)
             }
             
