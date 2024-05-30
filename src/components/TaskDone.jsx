@@ -60,16 +60,17 @@ export function TaskDone({taskDone}) {
     {taskDone.length === 0 ? <InfoMsg msg="No tasks done" /> :
       taskDone.map((task) => 
       <div key={task.key} className={`task task-done task-${task.category.replace(/\s+/g, '').toLowerCase()}`}>
-        <p>Category: {task.category}</p>
+        <div className="category"><p>{task.category}</p></div>
         <div className='history-image'><span class="material-symbols-outlined">history</span></div>
         <div className="history">
-          <p>Copleted: {task.date.completed}</p>
+          <p>Completed: {task.date.completed}</p>
           <p>Assigned: {task.date.assigned}</p>
           <p>Created: {task.date.created}</p>
         </div>
-        <p>{task.task}</p>
-        <p>Assigned to: {task.assignedTo}</p>
-        
+        <div className='task-details'>
+          <p>{task.task}</p>
+          <p>Assigned to: {task.assignedTo}</p>
+        </div>
         <button onClick={e => handleReturn(e, task)}>Return</button>
         <button onClick={e => handleArchive(e, task)}>Archive</button>
         <button onClick={e => handleDelete(e, task)}>Delete</button>

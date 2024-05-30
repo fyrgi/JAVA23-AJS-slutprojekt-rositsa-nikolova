@@ -55,6 +55,35 @@
     border: 2px solid green;
     border-radius: 5px;
     text-align: left;
+    word-wrap: break-word;
+  }
+
+  .task-done {
+    display: block;
+    padding: 10px;
+    margin: 10px 0;
+    border: 7px solid green;
+  }
+
+  .task-todo {
+    display: block;
+    padding: 10px;
+    margin: 10px 0;
+    border: 7px solid blue;
+  }
+
+  .task-inprogress {
+    display: block;
+    padding: 10px;
+    margin: 10px 0;
+    border: 7px solid orange;
+  }
+
+  .task-archive {
+    display: block;
+    padding: 10px;
+    margin: 10px 0;
+    border: 7px solid red;
   }
 
   .history-image {
@@ -84,36 +113,30 @@
     display: block;
   }
 
-
-
-
-
-
-  .task-done {
-    display: block;
-    padding: 10px;
-    margin: 10px 0;
-    border: 7px solid green;
+  .category {
+    font-weight: bold;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    border-radius: 5px;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
 
-  .task-todo {
-    display: block;
-    padding: 10px;
-    margin: 10px 0;
-    border: 7px solid blue;
+  .category p{
+    padding-left: 10px;
+    padding-right: 10px;
   }
 
-  .task-inprogress {
+  .task-details {
     display: block;
-    padding: 10px;
-    margin: 10px 0;
-    border: 7px solid orange;
-  }
-
-  .task-archive {
-    display: block;
-    padding: 10px;
-    margin: 10px 0;
-    border: 7px solid red;
+    top: 50px;
+    left: 0px;
+    padding: 5px;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
 

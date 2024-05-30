@@ -49,15 +49,14 @@ export function TaskToDo({ taskToDo }) {
         <InfoMsg msg="No tasks in to do" />
       ) : (
         taskToDo.map(task => (
-          <div
-            key={task.key}
-            className={`task task-todo task-${task.category.replace(/\s+/g, '').toLowerCase()}`}
-          >
-            <p>{task.category}</p>
-            <p>{task.task}</p>
+          <div key={task.key} className={`task task-todo task-${task.category.replace(/\s+/g, '').toLowerCase()}`}>
+            <div className="category"><p>{task.category}</p></div>
             <div className='history-image'><span class="material-symbols-outlined">history</span></div>
             <div className="history">
-              <p>Date created: {task.date.created}</p>
+              <p>Created: {task.date.created}</p>
+            </div>
+            <div className='task-details'>
+              <p>{task.task}</p>
             </div>
             <form onSubmit={(e) => handleSubmit(e, task)}>
               <input
