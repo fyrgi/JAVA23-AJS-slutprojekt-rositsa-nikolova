@@ -24,10 +24,12 @@
     overflow-y: scroll;
 
   }
+
   .task-list {
     flex: 1;
     margin: 0 10px;
   }
+
   .tasks-column {
     flex: 1;
     margin: 0 10px;
@@ -46,6 +48,7 @@
   }
 
   .task {
+    position: relative;
     display: block;
     padding: 10px;
     margin: 10px 0;
@@ -53,6 +56,38 @@
     border-radius: 5px;
     text-align: left;
   }
+
+  .history-image {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+  }
+  
+  .history {
+    display: none;
+    position: absolute;
+    top: 40px;
+    right: 10px;
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .history-image:hover .history,
+  .history-image:hover + .history {
+    z-index: 1;
+    display: block;
+  }
+
+
+
+
+
 
   .task-done {
     display: block;

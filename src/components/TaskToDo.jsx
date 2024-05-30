@@ -5,7 +5,7 @@ import { db, ref, update } from '../modules/firebaseConfig.js';
 export function TaskToDo({ taskToDo }) {
   const [assignedTo, setAssignedTo] = useState({});
   const [hasValue, setHasValue] = useState(false);
-  const handleAssign = (taskKey, value) => {
+  function handleAssign(taskKey, value){
     setAssignedTo(prevState => ({
       ...prevState,
       [taskKey]: value
@@ -13,7 +13,7 @@ export function TaskToDo({ taskToDo }) {
     setHasValue(true);
   };
 
-  const handleSubmit = async (e, task) => {
+  async function handleSubmit(e, task){
     e.preventDefault();
     
     // if empty or less than 2 characters, don't submit.
@@ -33,7 +33,6 @@ export function TaskToDo({ taskToDo }) {
     try {
       const taskRef = ref(db, `tasks/${task.key}`);
       await update(taskRef, updatedTask);
-      console.log("Task assigned to: ", assignedToValue);
       setAssignedTo(prevState => ({
         ...prevState,
         [task.key]: ''
@@ -56,6 +55,7 @@ export function TaskToDo({ taskToDo }) {
           >
             <p>{task.category}</p>
             <p>{task.task}</p>
+            <div className='history-image'><span class="material-symbols-outlined">history</span></div>
             <div className="history">
               <p>Date created: {task.date.created}</p>
             </div>
