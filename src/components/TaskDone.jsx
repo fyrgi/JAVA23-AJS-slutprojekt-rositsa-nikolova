@@ -15,7 +15,7 @@ export function TaskDone({taskDone}) {
     <>
     {taskDone.length === 0 ? <InfoMsg msg="No tasks done" /> :
       taskDone.map((task) => 
-      <div className={`task task-done task-${task.category.replace(/\s+/g, '').toLowerCase()}`}>
+      <div key={task.key} className={`task task-done task-${task.category.replace(/\s+/g, '').toLowerCase()}`}>
         <p>{task.task}</p>
         <p>Assigned to: {task.assignedTo}</p>
         <div className="history">

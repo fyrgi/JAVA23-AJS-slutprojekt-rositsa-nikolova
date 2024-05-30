@@ -9,7 +9,7 @@ export function App() {
 
   const [tasks, setTasks] = useState([]);
   const [status, setStatus] = useState('loading');
-  const tasksCont = ['To Do', 'In Progress', 'Done', 'Archived'];
+  const tasksCont = ['To Do', 'In Progress', 'Done'];
   const [taskToDo, setTaskToDo] = useState([]);
   const [taskInProgress, setTaskInProgress] = useState([]);
   const [taskDone, setTaskDone] = useState([]);
@@ -25,11 +25,6 @@ export function App() {
       } else {
         const tasksArray = Object.entries(data).map(([key, value]) => ({ key: key, ...value }));
         setTasks(tasksArray);
-        //setTasks(Object.values(data));
-        /*setTaskToDo(tasksArray.filter(task => task.status === 'to do'));
-        setTaskInProgress(tasksArray.filter(task => task.status === 'in progress'));
-        setTaskDone(tasksArray.filter(task => task.status === 'done'));
-        setTaskArchived(tasksArray.filter(task => task.status === 'archived'));*/
         setStatus('loaded');
       }
     });
@@ -44,15 +39,14 @@ export function App() {
 
   return ( 
     <div className="app">
-        <AddTaskForm setTasks={setTasks}/>
+        <AddTaskForm/>
 
         {status === 'error' && <ErrorMsg/>}
         {status === 'loading' && <LoadingMsg/>}
         {status === 'loaded' && <TasksContainer container={tasksCont}
                                     taskInProgress={taskInProgress}
                                     taskToDo={taskToDo}
-                                    taskDone={taskDone}
-                                    taskArchived={taskArchived}/>
+                                    taskDone={taskDone}/>
         }
         
     </div>

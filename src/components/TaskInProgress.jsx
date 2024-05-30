@@ -9,7 +9,7 @@ function handleDone(event) {
     <>
       { taskInProgress.length === 0 ? <InfoMsg msg="No tasks in progress" />:
        taskInProgress.map((task) => (
-        <div className={`task task-inprogress task-${task.category.replace(/\s+/g, '').toLowerCase()}`}>
+        <div key={task.key} className={`task task-inprogress task-${task.category.replace(/\s+/g, '').toLowerCase()}`}>
         <p>{task.task}</p>
         <p>Assigned to: {task.assignedTo}</p>
         <div className="history">

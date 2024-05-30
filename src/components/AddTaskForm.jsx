@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { db, push, ref, set } from '../modules/firebaseConfig.js';
 
-export function AddTaskForm({ setTasks }) {
+export function AddTaskForm() {
   const [taskText, setTaskText] = useState('');
   const [category, setCategory] = useState('');
 
