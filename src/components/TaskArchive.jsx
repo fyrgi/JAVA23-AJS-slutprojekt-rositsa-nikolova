@@ -1,5 +1,5 @@
 import { InfoMsg } from './InfoMsg';
-import { db, ref, update, remove } from '../modules/firebaseConfig.js';
+import { db, ref, remove } from '../modules/firebaseConfig.js';
 export function TaskArchive({taskArchived}) {
 
 

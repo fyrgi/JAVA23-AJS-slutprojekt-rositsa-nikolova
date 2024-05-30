@@ -1,4 +1,3 @@
-import {useState} from 'react';
 import { InfoMsg } from './InfoMsg';
 import { db, ref, update, remove } from '../modules/firebaseConfig.js';
 export function TaskDone({taskDone}) {

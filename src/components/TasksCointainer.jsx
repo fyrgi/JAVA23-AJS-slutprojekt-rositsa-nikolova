@@ -1,5 +1,3 @@
-import { db } from "../modules/firebaseConfig.js";
-import { useState, useEffect } from "react";
 import { TaskToDo } from "./TaskToDo.jsx";
 import { TaskInProgress } from "./TaskInProgress.jsx";
 import { TaskDone } from "./TaskDone.jsx";
