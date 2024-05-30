@@ -1,12 +1,15 @@
 .app {
     text-align: center;
   }
-  .tasks-container {
+
+  .task-container {
     display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
     margin-top: 20px;
     width: 100%;
+    border: 7px solid #ccc;
     
   }
 
@@ -17,7 +20,8 @@
     padding: 10px;
     margin-left:20px;
     margin-right:20px;
-    height: 500px;
+    height: 800px;
+    overflow-y: scroll;
 
   }
   .task-list {
