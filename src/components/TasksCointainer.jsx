@@ -8,9 +8,9 @@ export function TasksContainer({setTasks, container, taskInProgress, taskToDo, t
             {container.map(type => 
                 <div className="container-child" key={type}><h1>{type}</h1>
                     {type === "To Do" && <TaskToDo taskToDo={taskToDo} setTasks={setTasks} setStatus={setStatus} setInfoMsg={setInfoMsg} setErrorMsg={setErrorMsg}/>}
-                    {type === "In Progress" && <TaskInProgress taskInProgress={taskInProgress} setErrorMsg={setErrorMsg}/>}
-                    {type === "Done" && <TaskDone taskDone={taskDone} setErrorMsg={setErrorMsg}/>}
-                    {type === "Archived" && <TaskArchive taskArchived={taskArchived} setErrorMsg={setErrorMsg}/>}
+                    {type === "In Progress" && <TaskInProgress taskInProgress={taskInProgress} setStatus={setStatus} setErrorMsg={setErrorMsg}/>}
+                    {type === "Done" && <TaskDone taskDone={taskDone} setStatus={setStatus} setErrorMsg={setErrorMsg}/>}
+                    {type === "Archived" && <TaskArchive taskArchived={taskArchived} setStatus={setStatus} setErrorMsg={setErrorMsg}/>}
                 </div>)
             }
             

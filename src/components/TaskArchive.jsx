@@ -1,6 +1,6 @@
-import { InfoMsg } from './InfoMsg';
+import { InfoMsg } from './communication/InfoMsg.jsx';
 import { db, ref, remove } from '../modules/firebaseConfig.js';
-export function TaskArchive({taskArchived}) {
+export function TaskArchive({taskArchived, setStatus, setErrorMsg}) {
 
 
   async function handleDelete (e, task) {
@@ -10,7 +10,8 @@ export function TaskArchive({taskArchived}) {
       const taskToDelete = ref(db, `tasks/${task.key}`);
       await remove(taskToDelete);
     } catch (error) {
-      console.error("Error deleting the task: ", error);
+      setStatus(['loaded', 'error']);
+      setErrorMsg("Couldn't delete the task! " + error);
     }
   }
 

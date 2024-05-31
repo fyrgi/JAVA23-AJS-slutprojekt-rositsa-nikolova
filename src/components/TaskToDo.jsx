@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { InfoMsg } from './InfoMsg.jsx';
+import { InfoMsg } from './communication/InfoMsg.jsx';
 import { db, ref, update } from '../modules/firebaseConfig.js';
 
 export function TaskToDo({ taskToDo, setStatus, setInfoMsg, setErrorMsg }) {

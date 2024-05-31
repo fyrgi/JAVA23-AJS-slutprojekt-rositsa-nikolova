@@ -1,6 +1,6 @@
-import { InfoMsg } from './InfoMsg';
+import { InfoMsg } from './communication/InfoMsg.jsx';
 import { db, ref, update, remove } from '../modules/firebaseConfig.js';
-export function TaskDone({taskDone}) {
+export function TaskDone({taskDone, setStatus, setErrorMsg}) {
 
   async function handleReturn(e, task) {
     e.preventDefault();
@@ -17,7 +17,8 @@ export function TaskDone({taskDone}) {
       const taskRef = ref(db, `tasks/${task.key}`);
       await update(taskRef, updateTask);
     } catch (error) {
-      console.error("Error marking as returned: ", error);
+      setStatus(['loaded', 'error']);
+      setErrorMsg("Couldn't return the task! " + error);
     }
   };
 
@@ -36,7 +37,8 @@ export function TaskDone({taskDone}) {
       const taskRef = ref(db, `tasks/${task.key}`);
       await update(taskRef, archiveTask);
     } catch (error) {
-      console.error("Error arvhiving the task: ", error);
+      setStatus(['loaded', 'error']);
+      setErrorMsg("Couldn't archive the task! " + error);
     }
   }
 
@@ -47,7 +49,8 @@ export function TaskDone({taskDone}) {
       const taskToDelete = ref(db, `tasks/${task.key}`);
       await remove(taskToDelete);
     } catch (error) {
-      console.error("Error deleting the task: ", error);
+      setStatus(['loaded', 'error']);
+      setErrorMsg("Couldn't delete the task! " + error);
     }
   }
 

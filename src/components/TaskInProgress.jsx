@@ -1,6 +1,6 @@
-import { InfoMsg } from "./InfoMsg";
+import { InfoMsg } from "./communication/InfoMsg.jsx";
 import { db, ref, update } from '../modules/firebaseConfig.js';
-export function TaskInProgress({taskInProgress}) {
+export function TaskInProgress({taskInProgress, setStatus, setErrorMsg}) {
 
 async function handleDone(e, task) {
   e.preventDefault();
@@ -18,7 +18,8 @@ async function handleDone(e, task) {
     const taskRef = ref(db, `tasks/${task.key}`);
     await update(taskRef, doneTask);
   } catch (error) {
-    console.error("Error marking as done: ", error);
+    setStatus(['loaded', 'error']);
+    setErrorMsg("Couldn't mark the task as done! " + error);
   }
 };
 

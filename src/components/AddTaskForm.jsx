@@ -32,21 +32,23 @@ export function AddTaskForm({setStatus, status, setInfoMsg, setErrorMsg}) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="add-task-form">
-      <input
-        type="text"
-        value={taskText}
-        onChange={(e) => setTaskText(e.target.value)}
-        placeholder="Enter task..."
-        className="add-task-input"
-      />
-      <select value={category} onChange={(e) => setCategory(e.target.value)} className="add-task-select">
-        <option value="">Select Category</option>
-        <option value="UX">UX</option>
-        <option value="Dev Frontend">Dev Frontend</option>
-        <option value="Dev Backend">Dev Backend</option>
-      </select>
-      <button type="submit" className="add-task-button">Add Task</button>
-    </form>
+    <div>
+      <form onSubmit={handleSubmit} className="add-task-form">
+        <input
+          type="text"
+          value={taskText}
+          onChange={(e) => setTaskText(e.target.value)}
+          placeholder="Enter task..."
+          className="add-task-input"
+        />
+        <select value={category} onChange={(e) => setCategory(e.target.value)} className="add-task-select">
+          <option value="">Select Category</option>
+          <option value="UX">UX</option>
+          <option value="Dev Frontend">Dev Frontend</option>
+          <option value="Dev Backend">Dev Backend</option>
+        </select>
+        <button type="submit" className="add-task-button">Add Task</button>
+      </form>
+    </div>
   );
 }

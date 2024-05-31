@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { db, onValue, tasksRef} from '../modules/firebaseConfig.js';
 import { AddTaskForm } from './AddTaskForm.jsx';
-import { ErrorMsg } from './ErrorMsg.jsx';
-import { LoadingMsg } from './LoadingMsg.jsx';
+import { ErrorMsg } from './communication/ErrorMsg.jsx';
+import { LoadingMsg } from './communication/LoadingMsg.jsx';
 import { TasksContainer } from './TasksCointainer.jsx';
 import { ShowArchived } from './ShowArchived.jsx';
 import { InfoMsg } from './communication/InfoMsg.jsx';
@@ -23,7 +23,8 @@ export function App() {
     onValue(tasksRef, (snapshot) => {
       const data = snapshot.val();
       if (data === null) {
-        setStatus('info');
+        setStatus('info', 'loaded');
+        setInfoMsg('No tasks found. Add a task to see the board.');
         return;
       } else {
         const tasksArray = Object.entries(data).map(([key, value]) => ({ key: key, ...value }));
