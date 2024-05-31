@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { InfoMsg } from './InfoMsg.jsx';
 import { db, ref, update } from '../modules/firebaseConfig.js';
 
-export function TaskToDo({ taskToDo }) {
+export function TaskToDo({ taskToDo, setStatus, setInfoMsg, setErrorMsg }) {
   const [assignedTo, setAssignedTo] = useState({});
   const [hasValue, setHasValue] = useState(false);
   function handleAssign(taskKey, value){
@@ -16,8 +16,12 @@ export function TaskToDo({ taskToDo }) {
   async function handleSubmit(e, task){
     e.preventDefault();
     
-    // if empty or less than 2 characters, don't submit.
-    if (!hasValue) return;
+    // if empty don't submit.
+    if (!hasValue){
+      setStatus(['loaded', 'info']);
+      setInfoMsg('Please assign a person to this task.');
+      return;
+    }
 
     const assignedToValue = assignedTo[task.key];
     const updatedTask = {
@@ -38,7 +42,8 @@ export function TaskToDo({ taskToDo }) {
         [task.key]: ''
       }));
     } catch (error) {
-      console.error("Error updating task: ", error);
+      setStatus(['loaded', 'error']);
+      setErrorMsg("The task is not updated! Contact admin. ", error);
       setHasValue(false);
     }
   };
@@ -58,14 +63,15 @@ export function TaskToDo({ taskToDo }) {
             <div className='task-details'>
               <p>{task.task}</p>
             </div>
-            <form onSubmit={(e) => handleSubmit(e, task)}>
+            <form onSubmit={(e) => handleSubmit(e, task)} className='task-form'>
               <input
                 type="text"
                 value={assignedTo[task.key] || ''}
                 onChange={(e) => handleAssign(task.key, e.target.value)}
                 placeholder="Assign to"
+                className='task-input'
               />
-              <button type="submit">Start Task</button>
+              <button type="submit" className='task-button'>Assign</button>
             </form>
           </div>
         ))

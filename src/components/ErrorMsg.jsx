@@ -1,5 +1,7 @@
-export function ErrorMsg() {
-    return ( <div>
-        <h1>Something went wrong... try again</h1>
-    </div> );
+export function ErrorMsg({msg}) {
+    return ( 
+        <div className="error-msg">
+            <h1>Error: {msg}</h1>
+        </div> 
+    );
 }

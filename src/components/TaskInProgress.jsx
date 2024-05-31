@@ -35,9 +35,9 @@ async function handleDone(e, task) {
           </div>
           <div className='task-details'>
             <p>{task.task}</p>
-            <p>Assigned to: {task.assignedTo}</p>
+            <p className='assigned'>Assigned to: {task.assignedTo}</p>
           </div>
-          <button onClick={e => handleDone(e, task)}>Done</button>
+          <button onClick={e => handleDone(e, task)} className='task-button'>Done</button>
       </div>
       ))}
     </>

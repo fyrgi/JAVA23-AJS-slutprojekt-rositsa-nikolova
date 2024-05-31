@@ -4,7 +4,6 @@ export function TaskDone({taskDone}) {
 
   async function handleReturn(e, task) {
     e.preventDefault();
-    console.log("return task: ", task.key);
     const updateTask = {
       ...task,
       status: 'in progress',
@@ -24,7 +23,6 @@ export function TaskDone({taskDone}) {
 
   async function handleArchive (e, task) {
     e.preventDefault();
-    console.log("archive task: ", task.key);
     const archiveTask = {
       ...task,
       status: 'archived',
@@ -44,7 +42,6 @@ export function TaskDone({taskDone}) {
 
   async function handleDelete (e, task) {
     e.preventDefault();
-    console.log("delete task: ", task.key);
 
     try {
       const taskToDelete = ref(db, `tasks/${task.key}`);
@@ -68,11 +65,11 @@ export function TaskDone({taskDone}) {
         </div>
         <div className='task-details'>
           <p>{task.task}</p>
-          <p>Assigned to: {task.assignedTo}</p>
+          <p className='assigned'>Assigned to: {task.assignedTo}</p>
         </div>
-        <button onClick={e => handleReturn(e, task)}>Return</button>
-        <button onClick={e => handleArchive(e, task)}>Archive</button>
-        <button onClick={e => handleDelete(e, task)}>Delete</button>
+        <button onClick={e => handleReturn(e, task)} className='task-button return-button'>Return</button>
+        <button onClick={e => handleArchive(e, task)} className='task-button archive-button'>Archive</button>
+        <button onClick={e => handleDelete(e, task)} className='task-button delete-button'>Delete</button>
       </div>)}
     </>
     
