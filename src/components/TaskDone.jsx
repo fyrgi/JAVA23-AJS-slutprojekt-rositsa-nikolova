@@ -1,6 +1,15 @@
 import { InfoMsg } from './communication/InfoMsg.jsx';
 import { db, ref, update, remove } from '../modules/firebaseConfig.js';
-export function TaskDone({taskDone, setStatus, setErrorMsg}) {
+
+/**
+ * 
+ * task done is the other slightly more interesting part of the project. It has 3 buttons that do different things. 
+ * Because of a poor firebase planing in case of a Return the assigned date is rewritten instead of all of them to be saved for traceability.
+ * With a SQL database it could be implemented by creating a new table that saves the task history.
+ * The archive button does not delete a task but instead hides it. The user might see all the hidden tasks and decide to forever delete it after.
+ * The user might jsut delete the task that is in Done. 
+ */
+export function TaskDone({taskDone, setStatus, setMessage}) {
 
   async function handleReturn(e, task) {
     e.preventDefault();
@@ -18,7 +27,7 @@ export function TaskDone({taskDone, setStatus, setErrorMsg}) {
       await update(taskRef, updateTask);
     } catch (error) {
       setStatus(['loaded', 'error']);
-      setErrorMsg("Couldn't return the task! " + error);
+      setMessage("Couldn't return the task! " + error);
     }
   };
 
@@ -38,7 +47,7 @@ export function TaskDone({taskDone, setStatus, setErrorMsg}) {
       await update(taskRef, archiveTask);
     } catch (error) {
       setStatus(['loaded', 'error']);
-      setErrorMsg("Couldn't archive the task! " + error);
+      setMessage("Couldn't archive the task! " + error);
     }
   }
 
@@ -50,13 +59,13 @@ export function TaskDone({taskDone, setStatus, setErrorMsg}) {
       await remove(taskToDelete);
     } catch (error) {
       setStatus(['loaded', 'error']);
-      setErrorMsg("Couldn't delete the task! " + error);
+      setMessage("Couldn't delete the task! " + error);
     }
   }
 
   return (
     <>
-    {taskDone.length === 0 ? <InfoMsg msg="No tasks done" /> :
+    {taskDone.length === 0 ? <InfoMsg msg="No tasks done" styleAs="info-msg" /> :
       taskDone.map((task) => 
       <div key={task.key} className={`task task-done task-${task.category.replace(/\s+/g, '').toLowerCase()}`}>
         <div className="category"><p>{task.category}</p></div>

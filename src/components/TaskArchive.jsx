@@ -1,6 +1,6 @@
 import { InfoMsg } from './communication/InfoMsg.jsx';
 import { db, ref, remove } from '../modules/firebaseConfig.js';
-export function TaskArchive({taskArchived, setStatus, setErrorMsg}) {
+export function TaskArchive({taskArchived, setStatus, setMessage}) {
 
 
   async function handleDelete (e, task) {
@@ -11,13 +11,13 @@ export function TaskArchive({taskArchived, setStatus, setErrorMsg}) {
       await remove(taskToDelete);
     } catch (error) {
       setStatus(['loaded', 'error']);
-      setErrorMsg("Couldn't delete the task! " + error);
+      setMessage("Couldn't delete the task! " + error);
     }
   }
 
   return (
     <>
-    {taskArchived.length === 0 ? <InfoMsg msg="No archived tasks" /> :
+    {taskArchived.length === 0 ? <InfoMsg msg="No archived tasks" styleAs="info-msg" /> :
       taskArchived.map((task) => 
       <div key={task.key} className="task task-archive">
         <div className="category"><p>{task.category}</p></div>

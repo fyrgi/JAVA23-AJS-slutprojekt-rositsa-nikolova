@@ -1,15 +1,23 @@
-import { useState } from 'react';
+
 import { db, push, ref, set } from '../modules/firebaseConfig.js';
 
-export function AddTaskForm({setStatus, status, setInfoMsg, setErrorMsg}) {
-  const [taskText, setTaskText] = useState('');
-  const [category, setCategory] = useState('');
+/**
+ * 
+ * The component is always displayed on top of the the application. It is responsible for adding tasks to firebase.
+ * It does not add empty tasks or tasks without a category.
+ * In case of error, an error message will be displayed. We can have either an info message or an error message.
+ * 
+ */
+export function AddTaskForm({setStatus, setMessage}) {
+  let taskText = '';
+  let category = '';
 
   async function handleSubmit(e) {
     e.preventDefault();
     if (taskText.trim() === "" || category === "") {
       setStatus(['loaded', 'info']);
-      setInfoMsg('Please enter a task and select a category');
+      setMessage('Please enter a task and select a category');
+      e.target.reset();
       return;
     }
     
@@ -23,12 +31,13 @@ export function AddTaskForm({setStatus, status, setInfoMsg, setErrorMsg}) {
     try {
       const newTaskRef = push(ref(db, 'tasks'));
       await set(newTaskRef, newTask);
-      setTaskText('');
-      setCategory('');
+      taskText = '';
+      category = '';
     } catch (error) {
       setStatus(['loaded', 'error']);
-      setErrorMsg("Couldn't add task: "  + error);
+      setMessage("Couldn't add task: "  + error);
     }
+    e.target.reset();
   }
 
   return (
@@ -36,12 +45,11 @@ export function AddTaskForm({setStatus, status, setInfoMsg, setErrorMsg}) {
       <form onSubmit={handleSubmit} className="add-task-form">
         <input
           type="text"
-          value={taskText}
-          onChange={(e) => setTaskText(e.target.value)}
+          onChange={(e) => taskText = e.target.value}
           placeholder="Enter task..."
           className="add-task-input"
         />
-        <select value={category} onChange={(e) => setCategory(e.target.value)} className="add-task-select">
+        <select onChange={(e) => category = e.target.value} className="add-task-select">
           <option value="">Select Category</option>
           <option value="UX">UX</option>
           <option value="Dev Frontend">Dev Frontend</option>

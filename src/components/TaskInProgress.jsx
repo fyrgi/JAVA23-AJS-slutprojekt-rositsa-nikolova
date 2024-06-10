@@ -1,6 +1,6 @@
 import { InfoMsg } from "./communication/InfoMsg.jsx";
 import { db, ref, update } from '../modules/firebaseConfig.js';
-export function TaskInProgress({taskInProgress, setStatus, setErrorMsg}) {
+export function TaskInProgress({taskInProgress, setStatus, setMessage}) {
 
 async function handleDone(e, task) {
   e.preventDefault();
@@ -19,13 +19,13 @@ async function handleDone(e, task) {
     await update(taskRef, doneTask);
   } catch (error) {
     setStatus(['loaded', 'error']);
-    setErrorMsg("Couldn't mark the task as done! " + error);
+    setMessage("Couldn't mark the task as done! " + error);
   }
 };
 
   return (
     <>
-      { taskInProgress.length === 0 ? <InfoMsg msg="No tasks in progress" />:
+      { taskInProgress.length === 0 ? <InfoMsg msg="No tasks in progress" styleAs="info-msg" />:
        taskInProgress.map((task) => (
         <div key={task.key} className={`task task-inprogress task-${task.category.replace(/\s+/g, '').toLowerCase()}`}>
           <div className="category"><p>{task.category}</p></div>

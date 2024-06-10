@@ -1,6 +1,6 @@
-export function InfoMsg({msg}){
+export function InfoMsg({msg, styleAs}){
     return(
-        <div className="communication info-msg">
+        <div className={`communication ${styleAs}`}>
             <p>{msg}</p>
         </div>
     )

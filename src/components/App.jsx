@@ -1,22 +1,25 @@
 import { useState, useEffect } from 'react';
-import { db, onValue, tasksRef} from '../modules/firebaseConfig.js';
+import { onValue, tasksRef} from '../modules/firebaseConfig.js';
 import { AddTaskForm } from './AddTaskForm.jsx';
-import { ErrorMsg } from './communication/ErrorMsg.jsx';
+import { InfoMsg } from './communication/InfoMsg.jsx';
 import { LoadingMsg } from './communication/LoadingMsg.jsx';
 import { TasksContainer } from './TasksCointainer.jsx';
 import { ShowArchived } from './ShowArchived.jsx';
-import { InfoMsg } from './communication/InfoMsg.jsx';
+
+/**
+ * This component is on the top of the application.
+ * It contains the logic of display of the other components and the data that will be displayed within them.
+ * That happens based on the current status of the program (loading, loaded, error or info). The program always starts in loading mode until it gets data or error.
+ * The data that comes from the firebase is stored in an array and passed to the other components with an appropriate filter based on the status property form the firebase structure.
+ * The TasksContainer component does not have any meaningful purpose within the current scope of the project, but it is prepared for future scalability in case 
+ * there will be the need to have different type versions of the task-columns. InfoMsg used to be 2 different components whith one small difference - the className.
+ */
 export function App() {
 
   const [tasks, setTasks] = useState([]);
   const [status, setStatus] = useState(['loading']);
   const [tasksCont, setTasksCont] = useState(['To Do', 'In Progress', 'Done']);
-  const [taskToDo, setTaskToDo] = useState([]);
-  const [taskInProgress, setTaskInProgress] = useState([]);
-  const [taskDone, setTaskDone] = useState([]);
-  const [taskArchived, setTaskArchived] = useState([]);
-  const [infoMsg, setInfoMsg] = useState([]);
-  const [errorMsg, setErrorMsg] = useState([]);
+  const [message, setMessage] = useState([]);
   
   useEffect(() => {
     setStatus('loading');
@@ -24,7 +27,7 @@ export function App() {
       const data = snapshot.val();
       if (data === null) {
         setStatus('info', 'loaded');
-        setInfoMsg('No tasks found. Add a task to see the board.');
+        setMessage('No tasks found. Add a task to see the board.');
         return;
       } else {
         const tasksArray = Object.entries(data).map(([key, value]) => ({ key: key, ...value }));
@@ -34,31 +37,20 @@ export function App() {
     });
   }, []);
 
-  useEffect(() => {
-    console.log(status);
-  }, [status])
-
-  useEffect(() => {
-    setTaskToDo(tasks.filter(task => task.status === 'to do'));
-    setTaskInProgress(tasks.filter(task => task.status === 'in progress'));
-    setTaskDone(tasks.filter(task => task.status === 'done'));
-    setTaskArchived(tasks.filter(task => task.status === 'archived'));
-  }, [tasks]);
-
 
   return ( 
     <div className="app">
 
-        <AddTaskForm setStatus={setStatus} status={status} setInfoMsg={setInfoMsg} setErrorMsg={setErrorMsg}/>
+        <AddTaskForm setStatus={setStatus} status={status} setMessage={setMessage} />
         <ShowArchived tasksCont={tasksCont} setTasksCont={setTasksCont}/>
-        {status.includes('error') && <ErrorMsg msg={errorMsg}/>}
+        {status.includes('error') && <InfoMsg msg={message} styleAs="error-msg"/>}
         {status === 'loading' && <LoadingMsg/>}
-        {status.includes('info') && <InfoMsg msg={infoMsg} />}
-        {status.includes('loaded') && <TasksContainer container={tasksCont} setStatus={setStatus} setInfoMsg={setInfoMsg} setErrorMsg={setErrorMsg}
-                                    taskInProgress={taskInProgress}
-                                    taskToDo={taskToDo}
-                                    taskDone={taskDone}
-                                    taskArchived={taskArchived}/>
+        {status.includes('info') && <InfoMsg msg={message} styleAs="info-msg" />}
+        {status.includes('loaded') && <TasksContainer container={tasksCont} setStatus={setStatus} setMessage={setMessage}
+                                    taskInProgress={tasks.filter(task => task.status === 'in progress')}
+                                    taskToDo={tasks.filter(task => task.status === 'to do')}
+                                    taskDone={tasks.filter(task => task.status === 'done')}
+                                    taskArchived={tasks.filter(task => task.status === 'archived')}/>
         }
         
     </div>

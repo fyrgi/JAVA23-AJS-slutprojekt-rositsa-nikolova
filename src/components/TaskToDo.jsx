@@ -2,28 +2,36 @@ import { useState } from 'react';
 import { InfoMsg } from './communication/InfoMsg.jsx';
 import { db, ref, update } from '../modules/firebaseConfig.js';
 
-export function TaskToDo({ taskToDo, setStatus, setInfoMsg, setErrorMsg }) {
-  const [assignedTo, setAssignedTo] = useState({});
-  const [hasValue, setHasValue] = useState(false);
+/**
+ * 
+ * All new tasks end up in the To Do column because they are automatically added with the to do status.
+ * The component has a new form that has to make a difference between each task. That difference is made with the task.key.
+ * when the form is submitted, the task is updated in firebase only in case the assignedTo value is not empty. Otherwise the task is not updated and a message is displayed.
+ * The task won't be assigned to a person if the Assign button of another task is clicked.
+ * Because the form dissapears e.target.reset() is not used in the clean up  between row 45 and 51.
+ * 
+ * */
+export function TaskToDo({ taskToDo, setStatus, setMessage }) {
+  const [assignedTo, setAssignedTo] = useState('');
+
   function handleAssign(taskKey, value){
     setAssignedTo(prevState => ({
       ...prevState,
       [taskKey]: value
     }));
-    setHasValue(true);
   };
 
   async function handleSubmit(e, task){
     e.preventDefault();
     
+    const assignedToValue = assignedTo[task.key];
     // if empty don't submit.
-    if (!hasValue){
+    if (!assignedToValue) {
       setStatus(['loaded', 'info']);
-      setInfoMsg('Please assign a person to this task.');
+      setMessage('Please assign a person to this task.');
       return;
     }
 
-    const assignedToValue = assignedTo[task.key];
     const updatedTask = {
       ...task,
       assignedTo: assignedToValue,
@@ -43,15 +51,14 @@ export function TaskToDo({ taskToDo, setStatus, setInfoMsg, setErrorMsg }) {
       }));
     } catch (error) {
       setStatus(['loaded', 'error']);
-      setErrorMsg("The task is not updated! Contact admin. ", error);
-      setHasValue(false);
+      setMessage("The task is not updated! Contact admin. ", error);
     }
   };
 
   return (
     <>
       {taskToDo.length === 0 ? (
-        <InfoMsg msg="No tasks in to do" />
+        <InfoMsg msg="No tasks in to do" styleAs="info-msg" />
       ) : (
         taskToDo.map(task => (
           <div key={task.key} className={`task task-todo task-${task.category.replace(/\s+/g, '').toLowerCase()}`}>
